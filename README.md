@@ -3,7 +3,7 @@ Visual Basic for Applications - Style Guide
 
 ##Settings
 
-* Always use ```vba Option Explicit```
+* Always use ```Option Explicit```
 
 > Why? Using this avoids unnecessary reference errors and makes your code cleaner by convention 
 
@@ -78,7 +78,7 @@ Dim cSt As String
 
 > Why? Reusing variables can be confusing. To avoid errors, just create another variable where needed
 
-* Use Const for all static references
+* Use ```Const``` for all static references
 
 > Why? This ensures references are not errantly reassigned. Referencing is also much easier; if the variable needs to be changed throughout the project, it only needs to be changed in a single place
 
@@ -87,7 +87,7 @@ Dim cSt As String
 Public Const myFile = "C:\Users\Me\Folder\This.xlsb"
 ```
 
-* Avoid using Public variables where they are not needed
+* Avoid using ```Public``` variables where they are not needed
 
 > Why? Though global variables are useful, module scoped variables are easy to manage and the chance of errantly overwriting variables decreases
 
@@ -111,9 +111,9 @@ ws.range("Z10").value = "Hello"
 ThisWorkbook.Close savechanges:=True
 ```
 
-* Don't use a trailing Else if no clause is specified
+* Don't use a trailing ```Else``` if no clause is specified
 
-> Why? They are superflous. An End If block exit is more efficient and easier to read
+> Why? They are superflous. An ```End If``` block exit is more efficient and easier to read
 
 ```vba
 
@@ -157,9 +157,9 @@ Next
 Next
 ```
 
-* When testing for truthy or falsey values don't use True or False
+* When testing for truthy or falsey values don't use ```True``` or ```False```
 
-> Why? They are superfluous. If and If Not, are shorter and read better 
+> Why? They are superfluous. ```If``` and ```If Not```, are shorter and read better 
 
 ```vba
 
@@ -181,9 +181,9 @@ End If
 
 ```
 
-* Avoid using GoTo
+* Avoid using ```GoTo```
 
-> Why? It's bad practice and lazy. More often than not there will be a better way to code around it. If you must use it alongside On Error, immediately use On Error GoTo 0 to de-register any created Error Blocks 
+> Why? It's bad practice and lazy. More often than not there will be a better way to code around it. If you must use it alongside ```On Error```, immediately use ```On Error GoTo 0``` to de-register any created Error Blocks 
 
 ```vba
 
@@ -231,7 +231,7 @@ End Sub
 
 ##Workbook
 
-* Always use a variable to refer to Workbooks you are referencing
+* Always use a variable to refer to ```Workbook```s you are referencing
 
 > Why? This allows you to have clear, complete control over the objects you are using
  
@@ -248,6 +248,6 @@ ActiveWorkbook.Activate
 
 ```
 
-* Use ThisWorkbook rather than ActiveWorkbook
+* Use ```ThisWorkbook``` rather than ```ActiveWorkbook```
 
 > Why? This avoids confusion when creating procedures which run across multiple workbooks
