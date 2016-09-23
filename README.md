@@ -3,7 +3,7 @@ Visual Basic for Applications - Style Guide
 
 ##Settings
 
-* Always use Option Explicit
+* Always use ```vba Option Explicit```
 
 > Why? Using this avoids unnecessary reference errors and makes your code cleaner by convention 
 
