@@ -124,7 +124,7 @@ boo = worksheetExists("Data")
 
 End Sub
 
-Function worksheetExists(wsName As String) As Boolean
+Function worksheetExists(ByRef wsName As String) As Boolean
 Dim ws As Worksheet
 
 For Each ws In ThisWorkbook.Worksheets
@@ -188,7 +188,7 @@ Else
 End If
 ```
 
-* When using blocks, indent where appropriate
+* Always indent where appropriate
 
 > Why? Indentation makes your code much more readable
 
@@ -266,6 +266,84 @@ For Each v In a
   On Error Resume Next
   Debug.Print v + 10
 Next
+
+```
+
+* Use Arrays
+
+> Why? Arrays in VBA are extremely useful for creating efficent, ordered code
+
+```vba
+
+' useful Array functions
+
+' inArray
+
+Function inArray(ByRef arr() As Variant, ByVal item As Variant) As Boolean
+
+' -> searches through the items in an array and returns True if the argument item is found
+
+Dim i As Long
+
+inArray = False
+
+For i = LBound(arr()) To UBound(arr())
+  If UCase(arr(i)) = UCase(item) Then
+    inArray = True
+  End If
+Next
+
+End Function
+
+' usage
+
+Sub myModule()
+Dim a() As Variant
+
+a = Array("Robin", "Monica", "Ralph", "Eva", "Omar")
+
+Debug.Print inArray(a, "Robin") ' -> True
+Debug.Print inArray(a, "Bruce") ' -> False
+
+End Sub
+
+' aPush
+
+Function aPush(ByRef arr() As Variant, ByVal Value as Variant)
+
+' -> ReDims a dynamic array's boundaries and adds the selected item to the end of it
+
+Dim i As Long
+
+If Not IsArray(Value) Then
+  ReDim Preserve arr(LBound(arr()) To UBound(arr()) + 1)
+    arr(UBound(arr)) = Value
+Else
+  For i = LBound(Value) To UBound(Value)
+    ReDim Preserve arr(LBound(arr()) To UBound(arr()) + 1)
+    arr(UBound(arr)) = Value(i)
+  Next
+End If
+
+End Function
+
+Sub myModule()
+Dim ws As Worksheet
+Dim a() As Variant
+Dim cell As Range
+Dim v As Variant
+
+Set ws = ThisWorkbook.Sheets("Data")
+
+a = Array()
+
+For Each cell In ws.Range("A1:A5")
+  aPush a, cell.Value
+Next
+
+' the Array a() now contains the values from Range("A1:A5")
+
+End Sub
 
 ```
 
