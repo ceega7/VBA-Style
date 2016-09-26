@@ -46,6 +46,22 @@ Dim b As Long
 Debug.Print a + b
 ```
 
+* Use an appropriate data type instead of allowing VBA to automatically declare as variant for you
+
+> Why? Variants consume more storage space and - while their flexibility can be an advantage - it may cause errors in your code if a specific type is not declared
+
+```vba
+
+'good
+Dim i as Integer
+Dim myStr as String
+Dim ws as Worksheet
+
+'bad
+Dim i, myStr, ws
+
+```
+
 * Declare variables of the same type in blocks where possible
 
 > Why? Readability is greatly improved
@@ -92,6 +108,49 @@ Public Const myFile = "C:\Users\Me\Folder\This.xlsb"
 > Why? Though global variables are useful, module scoped variables are easy to manage and the chance of errantly overwriting variables decreases
 
 ##Style
+
+* Avoid overlong, clunky code and aim compartmentalise procedures into smaller Functions and Sub Procedures. If there is an action which you will repeat over time, create a function for reuse.
+
+> Why? Long blocks of code can be hard to understand when read back. Breaking code into smaller chunks allows you to repeat procedures and minimise the length of code blocks
+
+```vba
+
+'good
+Sub myModule()
+Dim ws As Worksheet
+Dim boo As Boolean
+
+boo = worksheetExists("Data")
+
+End Sub
+
+Function worksheetExists(wsName As String) As Boolean
+Dim ws As Worksheet
+
+For Each ws In ThisWorkbook.Worksheets
+  If ws.Name = wsName Then
+    worksheetExists = True
+      Exit Function
+  End If
+Next
+
+worksheetExists = False
+
+End Function
+
+'bad
+Sub myModule()
+Dim ws As Worksheet
+Dim boo As Boolean
+
+For Each ws In ThisWorkbook.Worksheets
+  If ws.Name = "Data" Then
+    boo = True
+  End If
+Next
+
+End Sub
+```
 
 * Where appropriate, seperate statements with line breaks and attempt to group them logically
 
@@ -228,6 +287,10 @@ Sub ThisMacroOpensTwoWorkbooksThenRunsAnotherMacro()
   '''
 End Sub
 ```
+
+##Functions
+
+* 
 
 ##Workbook
 
