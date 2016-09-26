@@ -347,6 +347,20 @@ End Sub
 
 ```
 
+* Use Named Parameters where appropriate
+
+> Why> Named parameters make code much easier to read
+
+```vba
+
+'good
+ThisWorkbook.Names.Add Name:="MyRange", RefersTo:=ThisWorkbook.Worksheets("Data").Range("A1:A5"), Visible:=True
+
+'bad
+ThisWorkbook.Names.Add "MyRange", ThisWorkbook.Worksheets("Data").Range("A1:A5"), True
+
+```
+
 ##Sub Procedures
 
 * Don't overcomplicate the names of sub-procedures. Keep them short, descriptive and use camelCase if appropriate
